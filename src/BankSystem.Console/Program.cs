@@ -5,13 +5,14 @@ using BankSystem.Infrastructure;
 
 // Створюємо репозиторій, вказуючи назву файлу
 var accountRepo = new JsonRepository<Account>("accounts.json");
+var transactionRepo = new JsonRepository<Transaction>("transactions.json");
 
 // Створюємо сервіс (Application layer)
-var bankService = new BankService(accountRepo);
+var bankService = new BankService(accountRepo, transactionRepo);
 
 Console.WriteLine("=== БАНКІВСЬКА СИСТЕМА v4.0 (Full Architecture) ===");
 
-if (!bankService.GetAll().Any())
+if (!bankService.GetAllAccounts().Any())
 {
     Console.WriteLine("База порожня. Створюємо перші рахунки...");
     bankService.CreateAccount("Артем", 5000);
@@ -23,7 +24,7 @@ try
 {
     Console.WriteLine("\nСпроба зняти 1000 грн у Артема (ID: 1):");
     bankService.Withdraw(1, 1000);
-    Console.WriteLine("Успішно! Новий баланс: " + bankService.GetAll().First().Balance);
+    Console.WriteLine("Успішно! Новий баланс: " + bankService.GetAllAccounts().First().Balance);
 }
 catch (Exception ex)
 {
@@ -31,7 +32,7 @@ catch (Exception ex)
 }
 
 Console.WriteLine("\nВсі клієнти в базі:");
-foreach (var acc in bankService.GetAll())
+foreach (var acc in bankService.GetAllAccounts())
 {
     Console.WriteLine($"- {acc.OwnerName}: {acc.Balance} грн");
 }

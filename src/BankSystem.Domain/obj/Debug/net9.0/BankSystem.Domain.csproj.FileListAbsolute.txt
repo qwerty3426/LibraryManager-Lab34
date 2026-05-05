@@ -1,0 +1,12 @@
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\bin\Debug\net9.0\BankSystem.Domain.deps.json
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\bin\Debug\net9.0\BankSystem.Domain.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\bin\Debug\net9.0\BankSystem.Domain.pdb
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.AssemblyInfo.cs
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.sourcelink.json
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\refint\BankSystem.Domain.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\BankSystem.Domain.pdb
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Domain\obj\Debug\net9.0\ref\BankSystem.Domain.dll

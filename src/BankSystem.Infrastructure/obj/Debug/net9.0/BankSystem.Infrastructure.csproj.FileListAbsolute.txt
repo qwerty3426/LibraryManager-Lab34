@@ -1,0 +1,16 @@
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\bin\Debug\net9.0\BankSystem.Infrastructure.deps.json
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\bin\Debug\net9.0\BankSystem.Infrastructure.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\bin\Debug\net9.0\BankSystem.Infrastructure.pdb
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\bin\Debug\net9.0\BankSystem.Domain.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\bin\Debug\net9.0\BankSystem.Domain.pdb
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.AssemblyInfo.cs
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.sourcelink.json
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSyst.461884C1.Up2Date
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\refint\BankSystem.Infrastructure.dll
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\BankSystem.Infrastructure.pdb
+C:\Users\artem\OneDrive\Desktop\lab28v5\BankSystem\src\BankSystem.Infrastructure\obj\Debug\net9.0\ref\BankSystem.Infrastructure.dll

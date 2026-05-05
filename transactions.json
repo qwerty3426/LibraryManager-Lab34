@@ -1,0 +1,16 @@
+[
+  {
+    "Id": "422322be-46f1-4aa4-937c-32b87eda2ec4",
+    "FromAccountId": "120d14af-1c96-46a8-a851-464b1d9ec9fa",
+    "ToAccountId": "120d14af-1c96-46a8-a851-464b1d9ec9fa",
+    "Amount": 1000,
+    "Date": "2026-04-29T15:03:55.5260992+03:00"
+  },
+  {
+    "Id": "11116004-c25d-4bf4-882e-2bcca6d17ed7",
+    "FromAccountId": "120d14af-1c96-46a8-a851-464b1d9ec9fa",
+    "ToAccountId": "7ab35df9-c88a-4e54-8c48-e0b722ecb781",
+    "Amount": 300,
+    "Date": "2026-04-29T15:03:55.537736+03:00"
+  }
+]

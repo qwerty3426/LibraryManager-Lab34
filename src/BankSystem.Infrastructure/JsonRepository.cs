@@ -23,7 +23,6 @@ namespace BankSystem.Infrastructure
         public void Add(T entity)
         {
             _items.Add(entity);
-            Save();
         }
 
         public T GetById(int id)
@@ -33,7 +32,7 @@ namespace BankSystem.Infrastructure
                 (int)x.GetType().GetProperty("Id")?.GetValue(x, null)! == id);
         }
 
-        private void Save()
+        public void SaveChanges()
         {
             var json = JsonSerializer.Serialize(_items, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);

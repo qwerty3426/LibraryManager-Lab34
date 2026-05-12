@@ -9,12 +9,16 @@ namespace BankSystem.Domain
     }
 
     // 2. Базовий аккаунт (SRP)
-    public class Account {
-        public int Id { get; set; }
-        public string OwnerName { get; set; } = "";
-        public decimal Balance { get; set; }
-    }
+    public class Account
+{
+    public int Id { get; set; }
 
+    public string OwnerName { get; set; } = string.Empty;
+
+    public decimal Balance { get; set; }
+
+    public string AccountType { get; set; } = "Standard";
+}
     // 3. Ощадний рахунок (LSP - наслідування)
     public class SavingsAccount : Account {
         public decimal InterestRate { get; set; }

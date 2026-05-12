@@ -1,81 +1,195 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Text.Json;
 using BankSystem.Domain;
+using BankSystem.Application.Strategies;
 
 namespace BankSystem.Application
 {
     public class BankService
     {
         private readonly IRepository<Account> _accountRepo;
-        private readonly IRepository<Transaction> _transactionRepo;
-        private readonly string _filePath = "accounts.json";
 
-        public BankService(IRepository<Account> accountRepo, IRepository<Transaction> transactionRepo)
+        public BankService(IRepository<Account> accountRepo)
         {
             _accountRepo = accountRepo;
-            _transactionRepo = transactionRepo;
-            Load();
         }
 
-        public void CreateAccount(string name, decimal initialBalance)
+        // =========================
+        // Strategy Pattern
+        // =========================
+
+        private IFeeStrategy GetFeeStrategy(Account account)
         {
-            var id = _accountRepo.GetAll().Any() ? _accountRepo.GetAll().Max(a => a.Id) + 1 : 1;
-            _accountRepo.Add(new Account { Id = id, OwnerName = name, Balance = initialBalance });
-            Save();
+            if (account.AccountType == "Premium")
+            {
+                return new PremiumFeeStrategy();
+            }
+
+            return new StandardFeeStrategy();
         }
+
+        // =========================
+        // Створення рахунку
+        // =========================
+
+        public void CreateAccount(
+            string name,
+            decimal initialBalance,
+            string accountType = "Standard")
+        {
+            var id = _accountRepo.GetAll().Any()
+                ? _accountRepo.GetAll().Max(a => a.Id) + 1
+                : 1;
+
+            var account = new Account
+            {
+                Id = id,
+                OwnerName = name,
+                Balance = initialBalance,
+                AccountType = accountType
+            };
+
+            _accountRepo.Add(account);
+
+            _accountRepo.SaveChanges();
+        }
+
+        // =========================
+        // Зняття коштів
+        // =========================
 
         public void Withdraw(int accountId, decimal amount)
         {
-            var account = _accountRepo.GetAll().FirstOrDefault(a => a.Id == accountId);
-            
-            if (account == null) throw new Exception("Рахунок не знайдено!");
-            if (account.Balance < amount) throw new InvalidOperationException("Недостатньо коштів на рахунку!");
+            var account = _accountRepo
+                .GetAll()
+                .FirstOrDefault(a => a.Id == accountId);
+
+            if (account == null)
+            {
+                throw new Exception("Рахунок не знайдено!");
+            }
+
+            if (amount <= 0)
+            {
+                throw new Exception("Сума повинна бути більшою за 0!");
+            }
+
+            // Добовий ліміт
+            if (amount > 20000)
+            {
+                throw new Exception("Перевищено ліміт зняття!");
+            }
+
+            if (account.Balance < amount)
+            {
+                throw new Exception("Недостатньо коштів!");
+            }
 
             account.Balance -= amount;
-            _transactionRepo.Add(new Transaction { Id = _transactionRepo.GetAll().Count() + 1, AccountId = accountId, Amount = -amount, Date = DateTime.Now });
-            Save();
+
+            _accountRepo.SaveChanges();
         }
 
-        public IEnumerable<Account> GetAllAccounts() => _accountRepo.GetAll();
+        // =========================
+        // Переказ між рахунками
+        // =========================
 
-        public IEnumerable<Account> GetRichAccounts(decimal minBalance) => 
-            _accountRepo.GetAll().Where(a => a.Balance >= minBalance);
-
-        private void Save()
+        public void Transfer(
+            int fromAccountId,
+            int toAccountId,
+            decimal amount)
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(_accountRepo.GetAll(), options);
-            File.WriteAllText(_filePath, json);
-        }
+            var fromAcc = _accountRepo
+                .GetAll()
+                .FirstOrDefault(a => a.Id == fromAccountId);
 
-        private void Load()
-        {
-            if (File.Exists(_filePath))
+            var toAcc = _accountRepo
+                .GetAll()
+                .FirstOrDefault(a => a.Id == toAccountId);
+
+            if (fromAcc == null || toAcc == null)
             {
-                var json = File.ReadAllText(_filePath);
-                if (string.IsNullOrWhiteSpace(json)) return;
-
-                try 
-                {
-                    var options = new JsonSerializerOptions { 
-                        PropertyNameCaseInsensitive = true,
-                        NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString
-                    };
-                    
-                    var accounts = JsonSerializer.Deserialize<List<Account>>(json, options);
-                    if (accounts != null)
-                    {
-                        foreach (var acc in accounts) _accountRepo.Add(acc);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Попередження: Не вдалося прочитати файл даних: {ex.Message}");
-                }
+                throw new Exception("Рахунок не знайдено!");
             }
+
+            if (amount <= 0)
+            {
+                throw new Exception("Сума повинна бути більшою за 0!");
+            }
+
+            // =========================
+            // Strategy Pattern
+            // =========================
+
+            var strategy = GetFeeStrategy(fromAcc);
+
+            decimal fee = strategy.CalculateFee(amount);
+
+            decimal total = amount + fee;
+
+            // =========================
+            // Бізнес-правило
+            // =========================
+
+            if (fromAcc.Balance < total)
+            {
+                throw new Exception("Недостатньо коштів з урахуванням комісії!");
+            }
+
+            // =========================
+            // Переказ
+            // =========================
+
+            fromAcc.Balance -= total;
+
+            toAcc.Balance += amount;
+
+            _accountRepo.SaveChanges();
         }
+
+        // =========================
+        // Отримати всі рахунки
+        // =========================
+
+        public IEnumerable<Account> GetAllAccounts()
+        {
+            return _accountRepo.GetAll();
+        }
+
+        // =========================
+        // LINQ — багаті рахунки
+        // =========================
+
+        public IEnumerable<Account> GetRichAccounts(decimal minBalance)
+        {
+            return _accountRepo
+                .GetAll()
+                .Where(a => a.Balance >= minBalance);
+        }
+
+        // =========================
+        // LINQ — топ рахунків
+        // =========================
+
+        public IEnumerable<Account> GetTopAccounts()
+        {
+            return _accountRepo
+                .GetAll()
+                .OrderByDescending(a => a.Balance)
+                .Take(5);
+        }
+
+        // =========================
+        // LINQ — загальний баланс
+        // =========================
+
+        public decimal GetTotalBalance()
+        {
+            return _accountRepo
+                .GetAll()
+                .Sum(a => a.Balance);
+        }
+
     }
 }

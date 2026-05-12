@@ -6,5 +6,6 @@ namespace BankSystem.Domain
         IEnumerable<T> GetAll();
         void Add(T entity);
         T GetById(int id);
+        void SaveChanges();
     }
 }

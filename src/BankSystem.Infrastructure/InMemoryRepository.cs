@@ -17,5 +17,7 @@ namespace BankSystem.Infrastructure
         {
             return _items.FirstOrDefault(x => (int?)x.GetType().GetProperty("Id")?.GetValue(x, null) == id)!;
         }
+
+        public void SaveChanges() { }
     }
 }

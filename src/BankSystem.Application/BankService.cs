@@ -9,10 +9,19 @@ namespace BankSystem.Application
     public class BankService
     {
         private readonly IRepository<Account> _accountRepo;
+        private readonly IRepository<Transaction>? _transactionRepo;
 
         public BankService(IRepository<Account> accountRepo)
         {
             _accountRepo = accountRepo;
+        }
+
+        public BankService(
+            IRepository<Account> accountRepo,
+            IRepository<Transaction> transactionRepo)
+            : this(accountRepo)
+        {
+            _transactionRepo = transactionRepo;
         }
 
         // =========================

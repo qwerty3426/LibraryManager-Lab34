@@ -103,3 +103,11 @@ C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\obj\
 C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\obj\Debug\net9.0\BankSystem.Tests.pdb
 C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\obj\Debug\net9.0\BankSystem.Tests.genruntimeconfig.cache
 C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\obj\Debug\net9.0\ref\BankSystem.Tests.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\BankSystem.Infrastructure.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\BankSystem.Infrastructure.pdb
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\Castle.Core.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\FluentAssertions.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\Moq.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\System.Diagnostics.EventLog.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+C:\Users\artem\OneDrive\Desktop\LibraryManager-Lab34\tests\BankSystem.Tests\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll

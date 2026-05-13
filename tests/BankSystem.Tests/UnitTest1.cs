@@ -101,7 +101,7 @@ namespace BankSystem.Tests
             var repo = new InMemoryRepository<Account>();
             var service = new BankService(repo);
 
-            service.CreateAccount("Premium", 5000, "Premium");
+            service.CreateAccount("Premium", 5000, AccountType.Premium);
             service.CreateAccount("Receiver", 1000);
 
             service.Transfer(1, 2, 100);
@@ -116,7 +116,7 @@ namespace BankSystem.Tests
             var repo = new InMemoryRepository<Account>();
             var service = new BankService(repo);
 
-            service.CreateAccount("Standard", 1000, "Standard");
+            service.CreateAccount("Standard", 1000, AccountType.Standard);
             service.CreateAccount("Receiver", 1000);
 
             service.Transfer(1, 2, 100);

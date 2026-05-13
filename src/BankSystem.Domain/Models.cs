@@ -2,6 +2,16 @@ using System;
 
 namespace BankSystem.Domain
 {
+    // ========================= 
+    // ENUM
+    // =========================
+    
+    public enum AccountType
+    {
+        Standard,
+        Premium
+    }
+
     // 1. Клієнт
     public class Customer {
         public int Id { get; set; }
@@ -10,15 +20,15 @@ namespace BankSystem.Domain
 
     // 2. Базовий аккаунт (SRP)
     public class Account
-{
-    public int Id { get; set; }
+    {
+        public int Id { get; set; }
 
-    public string OwnerName { get; set; } = string.Empty;
+        public string OwnerName { get; set; } = string.Empty;
 
-    public decimal Balance { get; set; }
+        public decimal Balance { get; set; }
 
-    public string AccountType { get; set; } = "Standard";
-}
+        public AccountType AccountType { get; set; } = AccountType.Standard;
+    }
     // 3. Ощадний рахунок (LSP - наслідування)
     public class SavingsAccount : Account {
         public decimal InterestRate { get; set; }

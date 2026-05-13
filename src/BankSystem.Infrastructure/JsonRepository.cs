@@ -40,9 +40,27 @@ namespace BankSystem.Infrastructure
 
         private List<T> Load()
         {
-            if (!File.Exists(_filePath)) return new List<T>();
+            if (!File.Exists(_filePath))
+            {
+                return new List<T>();
+            }
+
             var json = File.ReadAllText(_filePath);
-            return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
+
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return new List<T>();
+            }
+
+            try
+            {
+                return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
+            }
+            catch
+            {
+                // захист від битого JSON
+                return new List<T>();
+            }
         }
     }
 }

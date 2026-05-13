@@ -30,12 +30,11 @@ namespace BankSystem.Application
 
         private IFeeStrategy GetFeeStrategy(Account account)
         {
-            if (account.AccountType == "Premium")
+            return account.AccountType switch
             {
-                return new PremiumFeeStrategy();
-            }
-
-            return new StandardFeeStrategy();
+                AccountType.Premium => new PremiumFeeStrategy(),
+                _ => new StandardFeeStrategy()
+            };
         }
 
         // =========================
@@ -45,7 +44,7 @@ namespace BankSystem.Application
         public void CreateAccount(
             string name,
             decimal initialBalance,
-            string accountType = "Standard")
+            AccountType accountType = AccountType.Standard)
         {
             var id = _accountRepo.GetAll().Any()
                 ? _accountRepo.GetAll().Max(a => a.Id) + 1

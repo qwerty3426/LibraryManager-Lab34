@@ -1,62 +1,129 @@
 # TESTING — BankSystem
 
-## Загальна інформація
+# 1. Загальна інформація
 
-Для перевірки коректності роботи системи використовуються unit-тести.
+У проєкті реалізовано:
 
-Тестування дозволяє:
-- перевіряти бізнес-логіку;
-- знаходити помилки;
-- гарантувати стабільність системи.
+- unit testing;
+- integration testing;
+- coverage testing.
 
----
+Для тестування використано:
 
-# Основні перевірки
-
-## Перекази
-
-Перевіряється:
-- успішний переказ;
-- недостатній баланс;
-- неіснуючі рахунки.
+- xUnit;
+- FluentAssertions;
+- Coverlet;
+- ReportGenerator.
 
 ---
 
-## Валідація
+# 2. Unit Tests
 
-Перевіряється:
-- сума > 0;
-- унікальність IBAN;
-- ліміти операцій.
+Unit tests перевіряють:
 
----
+- бізнес-логіку;
+- fee strategies;
+- валідацію;
+- роботу сервісів;
+- LINQ-запити.
 
-## Persistence
-
-Перевіряється:
-- збереження JSON;
-- завантаження JSON;
-- коректність даних.
+Основні класи:
+- BankServiceTests;
+- FeeStrategyTests.
 
 ---
 
-## Комісії
+# 3. Integration Tests
 
-Перевіряється:
-- StandardFeeStrategy;
-- PremiumFeeStrategy;
-- правильність обчислень.
+Integration tests перевіряють:
+
+- JsonRepository<T>;
+- persistence;
+- файлову систему;
+- JSON serialization;
+- відновлення даних.
+
+Основний клас:
+- JsonRepositoryTests.
 
 ---
 
-# Unit Testing Framework
+# 4. Запуск тестів
 
-Використовується:
-- xUnit / MSTest
-
----
-
-# Запуск тестів
+Запуск усіх тестів:
 
 ```bash
 dotnet test
+```
+
+---
+
+# 5. Генерація coverage report
+
+## Крок 1
+
+```bash
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+---
+
+## Крок 2
+
+```bash
+reportgenerator -reports:"tests/BankSystem.Tests/TestResults/**/coverage.cobertura.xml" -targetdir:"coverage-report"
+```
+
+---
+
+## Крок 3
+
+Відкрити coverage report:
+
+```bash
+start coverage-report/index.html
+```
+
+---
+
+# 6. Результати покриття
+
+## Line Coverage
+
+- 88.7%
+
+## Branch Coverage
+
+- 83.3%
+
+---
+
+# 7. Що перевіряється тестами
+
+## BankService
+
+- створення акаунтів;
+- поповнення;
+- зняття коштів;
+- fee strategies;
+- перевірка помилок.
+
+---
+
+## JsonRepository<T>
+
+- створення JSON-файлів;
+- збереження даних;
+- завантаження;
+- робота з пустими файлами;
+- обробка некоректного JSON.
+
+---
+
+# 8. Надійність системи
+
+Тестове покриття підтверджує:
+- стабільність бізнес-логіки;
+- коректність persistence;
+- правильну обробку помилок;
+- працездатність архітектури.

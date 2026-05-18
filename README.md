@@ -1,92 +1,145 @@
-# BankSystem 
+# BankSystem
 
-BankSystem — консольна банківська система, розроблена в рамках лабораторних робіт №34–35 з дисципліни «Об’єктно-орієнтоване програмування».
+BankSystem — консольний застосунок для моделювання банківської системи, створений у межах курсу ООП.
 
-Проєкт реалізує багатошарову архітектуру, бізнес-логіку банківських операцій, асинхронне збереження даних у JSON та аналітичні LINQ-запити.
+Проєкт демонструє:
 
----
-
-#  Основні можливості
-
-## Ітерація 1 (Lab 34)
-
-- Створення банківських рахунків
-- Поповнення рахунку
-- Зняття коштів
-- Переказ між рахунками
-- Збереження транзакцій
-- Консольний інтерфейс
-- Unit-тести базової логіки
+- Clean Architecture;
+- SOLID principles;
+- Strategy Pattern;
+- Generic Repository Pattern;
+- JSON persistence;
+- Unit та Integration Testing;
+- LINQ;
+- рефакторинг і тестове покриття.
 
 ---
 
-## Ітерація 2 (Lab 35)
+# Основні можливості
 
-### Бізнес-правила
-- Баланс рахунку не може бути від’ємним
-- Сума транзакції повинна бути більшою за 0
-- Добовий ліміт на зняття коштів — 20 000 грн
-- Номер IBAN є унікальним
-- Комісія залежить від типу клієнта
+## Робота з акаунтами
 
-### Persistence Layer
-- Асинхронне збереження даних у JSON
-- Завантаження рахунків при старті програми
-- Збереження історії транзакцій
+- створення акаунтів;
+- поповнення балансу;
+- зняття коштів;
+- перевірка коректності операцій.
 
-### Strategy Pattern
-Реалізовано Strategy Pattern для обчислення комісій:
-- StandardFeeStrategy
-- PremiumFeeStrategy
+## Persistence
 
-### LINQ Аналітика
-- Топ транзакцій
-- Групування операцій
-- Пошук неактивних рахунків
-- Підрахунок загального балансу
+- збереження даних у JSON;
+- автоматичне відновлення після перезапуску;
+- обробка пошкоджених файлів.
+
+## Тестування
+
+- unit tests;
+- integration tests;
+- coverage report.
 
 ---
 
-#  Архітектура
+# Архітектура проєкту
 
-## BankSystem.Domain
-Містить:
-- Account
-- Transaction
-- IRepository
-- доменні правила
+Проєкт поділений на окремі шари:
 
-## BankSystem.Application
-Містить:
-- BankService
-- бізнес-логіку
-- перевірки та валідацію
+```text
+src/
+ ├── BankSystem.Domain
+ ├── BankSystem.Application
+ └── BankSystem.Infrastructure
 
-## BankSystem.Infrastructure
-Містить:
-- JsonRepository
-- роботу з JSON
-- persistence layer
-
-## BankSystem.Console
-Консольний інтерфейс користувача.
-
-## Tests
-Unit-тести для перевірки бізнес-логіки.
+tests/
+ └── BankSystem.Tests
+```
 
 ---
 
-#  Запуск проєкту
+# Використані технології
 
-## Вимоги
-- .NET 9 SDK
+- C#
+- .NET 9
+- xUnit
+- FluentAssertions
+- System.Text.Json
+- ReportGenerator
+- Coverlet
 
 ---
 
-## Збірка проєкту
+# Запуск проєкту
+
+## Клонування репозиторію
 
 ```bash
-dotnet build
+git clone https://github.com/qwerty3426/LibraryManager-Lab34.git
+```
 
-#  Запуск юніт ткстів
-![alt text](image.png)
+---
+
+## Запуск застосунку
+
+```bash
+dotnet run --project src/BankSystem.Console
+```
+
+---
+
+# Запуск тестів
+
+```bash
+dotnet test
+```
+
+---
+
+# Генерація coverage report
+
+```bash
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+Після цього:
+
+```bash
+reportgenerator -reports:"tests/BankSystem.Tests/TestResults/**/coverage.cobertura.xml" -targetdir:"coverage-report"
+```
+
+Відкрити звіт:
+
+```bash
+start coverage-report/index.html
+```
+
+---
+
+# Покриття тестами
+
+- Line coverage: 88.7%
+- Branch coverage: 83.3%
+
+---
+
+# Документація
+
+- [USER_GUIDE.md](USER_GUIDE.md)
+- [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)
+- [TESTING.md](TESTING.md)
+- [CHANGELOG.md](CHANGELOG.md)
+- [FINAL_REPORT.md](FINAL_REPORT.md)
+
+---
+
+# UML та додаткові матеріали
+
+Усі UML-артефакти та додаткові документи знаходяться в папці:
+
+```text
+docs/
+```
+
+---
+
+# Автор
+
+Artem Kotsiuba  
+Rivne Professional College of Information Technologies

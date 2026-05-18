@@ -134,7 +134,8 @@ start coverage-report/index.html
 Усі UML-артефакти та додаткові документи знаходяться в папці:
 
 ```text
-docs/
+docs/docs/UML.md 
+![alt text](image-3.png)
 ```
 
 ---

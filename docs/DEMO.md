@@ -31,9 +31,10 @@ dotnet run --project src/BankSystem.Console
 # 2. Основний сценарій
 
 ## Створення акаунта
-
+![alt text](image-1.png)
 Показати:
 - створення нового акаунта;
+![alt text](image-4.png)
 - введення власника;
 - початковий баланс.
 
@@ -45,7 +46,7 @@ dotnet run --project src/BankSystem.Console
 - вибір акаунта;
 - внесення коштів;
 - оновлення балансу.
-
+![alt text](image-5.png)
 ---
 
 ## Зняття коштів
@@ -54,6 +55,7 @@ dotnet run --project src/BankSystem.Console
 - fee strategy;
 - зміну балансу;
 - валідацію операції.
+![alt text](image-6.png)
 
 ---
 

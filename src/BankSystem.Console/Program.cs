@@ -44,8 +44,7 @@ while (true)
                 bankService.CreateAccount(
                     name,
                     balance,
-                    type);
-
+                  AccountType.Premium);
                 Console.WriteLine("Рахунок створено!");
 
                 break;

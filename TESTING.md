@@ -37,3 +37,4 @@ dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 - неіснуючий акаунт
 - недостатньо коштів
 - помилки доступу до файлів
+![alt text](image.png)

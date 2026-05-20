@@ -1,0 +1,27 @@
+## Build outputs
+[Bb]in/
+[Oo]bj/
+[Log]/
+
+## User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+## Visual Studio cache and settings
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+## Test results and Coverage
+TestResults/
+*.clog
+*.cobertura.xml
+*.opencover.xml
+
+## Проміжне збереження даних банку (щоб тести не читали сміття)
+*.json
+!globaljson.json

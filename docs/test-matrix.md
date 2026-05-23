@@ -1,5 +1,9 @@
-﻿# 📊 Матриця тестування (Lab 36)
+﻿# Test Matrix
 
 | Use Case | Тип тесту | Статус |
 |---|---|---|
-| Створення рахунку | Unit | Тест додано |
+| Create Book | Unit | Done |
+| Borrow Book | Unit | Done |
+| Return Book | Unit | Done |
+| Save JSON | Integration | Done |
+| Load JSON | Integration | Done |

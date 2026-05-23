@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - lab34
+  pull_request:
+    branches:
+      - lab34
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore
+        run: dotnet restore BankSystem.sln
+      - name: Build
+        run: dotnet build BankSystem.sln --configuration Release --no-restore
+      - name: Test
+        run: dotnet test BankSystem.Tests/BankSystem.Tests.csproj --configuration Release --no-build

@@ -1,74 +1,27 @@
-![alt text](image-2.png)
----
-
-# `docs/UML.md`
-
-```md
-# UML — BankSystem
+﻿# UML — BankSystem
 
 ## Основні сутності
 
 ### Account
-Представляє банківський рахунок.
-
-Містить:
 - IBAN
 - Balance
 - OwnerName
 
----
-
-### Transaction
-Представляє фінансову операцію.
-
-Містить:
-- FromAccount
-- ToAccount
-- Amount
-- Date
-
----
-
 ### BankService
-Містить бізнес-логіку системи.
+- виконання операцій з рахунками;
+- перевірка балансу;
+- керування переказами.
 
-Відповідає за:
-- перекази;
-- перевірки;
-- валідацію.
+### IRepository<T>
+- базовий інтерфейс для сховища;
+- методи `Add`, `GetById`, `GetAll`, `Update`.
 
----
+### InMemoryRepository<T>
+- реалізація сховища в пам’яті;
+- зберігає дані під час виконання програми.
 
-### JsonRepository
-Відповідає за:
-- збереження;
-- завантаження;
-- роботу з JSON.
+## Архітектура
 
----
-
-# Strategy Pattern
-
-## IFeeStrategy
-Інтерфейс для обчислення комісії.
-
----
-
-## StandardFeeStrategy
-Стандартна комісія:
-- 1%.
-
----
-
-## PremiumFeeStrategy
-Premium-комісія:
-- 0%.
-
----
-
-# Архітектура
-
-Система побудована за принципами:
-- Clean Architecture;
-- Separation of Concerns;
-- SOLID.
+- `BankSystem.Domain` — доменні моделі;
+- `BankSystem.Application` — бізнес-логіка;
+- `BankSystem.Console` — інтерфейс користувача.

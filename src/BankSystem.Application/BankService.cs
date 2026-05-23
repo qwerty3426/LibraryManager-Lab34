@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using BankSystem.Domain;
-using BankSystem.Application.Strategies;
 
 namespace BankSystem.Application
 {
@@ -15,55 +13,32 @@ namespace BankSystem.Application
             _accountRepo = accountRepo;
         }
 
-        // =========================
-        // Strategy Pattern
-        // =========================
-
-        private IFeeStrategy GetFeeStrategy(Account account)
+        public void CreateAccount(string name, decimal initialBalance)
         {
-            if (account.AccountType == "Premium")
+            int id = 1;
+
+            foreach (var existing in _accountRepo.GetAll())
             {
-                return new PremiumFeeStrategy();
+                if (existing.Id >= id)
+                {
+                    id = existing.Id + 1;
+                }
             }
-
-            return new StandardFeeStrategy();
-        }
-
-        // =========================
-        // Створення рахунку
-        // =========================
-
-        public void CreateAccount(
-            string name,
-            decimal initialBalance,
-            string accountType = "Standard")
-        {
-            var id = _accountRepo.GetAll().Any()
-                ? _accountRepo.GetAll().Max(a => a.Id) + 1
-                : 1;
 
             var account = new Account
             {
                 Id = id,
                 OwnerName = name,
-                Balance = initialBalance,
-                AccountType = accountType
+                Balance = initialBalance
             };
 
             _accountRepo.Add(account);
-
             _accountRepo.SaveChanges();
         }
 
-        // =========================
-        // Зняття коштів
-        // =========================
-
-        public void Withdraw(int accountId, decimal amount)
+        public void Deposit(int accountId, decimal amount)
         {
-            var account = _accountRepo
-                .GetAll()
-                .FirstOrDefault(a => a.Id == accountId);
+            var account = _accountRepo.GetById(accountId);
 
             if (account == null)
             {
@@ -72,13 +47,25 @@ namespace BankSystem.Application
 
             if (amount <= 0)
             {
-                throw new Exception("Сума повинна бути більшою за 0!");
+                throw new Exception("Сума має бути більшою за 0!");
             }
 
-            // Добовий ліміт
-            if (amount > 20000)
+            account.Balance += amount;
+            _accountRepo.SaveChanges();
+        }
+
+        public void Withdraw(int accountId, decimal amount)
+        {
+            var account = _accountRepo.GetById(accountId);
+
+            if (account == null)
             {
-                throw new Exception("Перевищено ліміт зняття!");
+                throw new Exception("Рахунок не знайдено!");
+            }
+
+            if (amount <= 0)
+            {
+                throw new Exception("Сума має бути більшою за 0!");
             }
 
             if (account.Balance < amount)
@@ -87,109 +74,37 @@ namespace BankSystem.Application
             }
 
             account.Balance -= amount;
-
             _accountRepo.SaveChanges();
         }
 
-        // =========================
-        // Переказ між рахунками
-        // =========================
-
-        public void Transfer(
-            int fromAccountId,
-            int toAccountId,
-            decimal amount)
+        public void Transfer(int fromAccountId, int toAccountId, decimal amount)
         {
-            var fromAcc = _accountRepo
-                .GetAll()
-                .FirstOrDefault(a => a.Id == fromAccountId);
+            var sender = _accountRepo.GetById(fromAccountId);
+            var receiver = _accountRepo.GetById(toAccountId);
 
-            var toAcc = _accountRepo
-                .GetAll()
-                .FirstOrDefault(a => a.Id == toAccountId);
-
-            if (fromAcc == null || toAcc == null)
+            if (sender == null || receiver == null)
             {
                 throw new Exception("Рахунок не знайдено!");
             }
 
             if (amount <= 0)
             {
-                throw new Exception("Сума повинна бути більшою за 0!");
+                throw new Exception("Сума має бути більшою за 0!");
             }
 
-            // =========================
-            // Strategy Pattern
-            // =========================
-
-            var strategy = GetFeeStrategy(fromAcc);
-
-            decimal fee = strategy.CalculateFee(amount);
-
-            decimal total = amount + fee;
-
-            // =========================
-            // Бізнес-правило
-            // =========================
-
-            if (fromAcc.Balance < total)
+            if (sender.Balance < amount)
             {
-                throw new Exception("Недостатньо коштів з урахуванням комісії!");
+                throw new Exception("Недостатньо коштів!");
             }
 
-            // =========================
-            // Переказ
-            // =========================
-
-            fromAcc.Balance -= total;
-
-            toAcc.Balance += amount;
-
+            sender.Balance -= amount;
+            receiver.Balance += amount;
             _accountRepo.SaveChanges();
         }
-
-        // =========================
-        // Отримати всі рахунки
-        // =========================
 
         public IEnumerable<Account> GetAllAccounts()
         {
             return _accountRepo.GetAll();
         }
-
-        // =========================
-        // LINQ — багаті рахунки
-        // =========================
-
-        public IEnumerable<Account> GetRichAccounts(decimal minBalance)
-        {
-            return _accountRepo
-                .GetAll()
-                .Where(a => a.Balance >= minBalance);
-        }
-
-        // =========================
-        // LINQ — топ рахунків
-        // =========================
-
-        public IEnumerable<Account> GetTopAccounts()
-        {
-            return _accountRepo
-                .GetAll()
-                .OrderByDescending(a => a.Balance)
-                .Take(5);
-        }
-
-        // =========================
-        // LINQ — загальний баланс
-        // =========================
-
-        public decimal GetTotalBalance()
-        {
-            return _accountRepo
-                .GetAll()
-                .Sum(a => a.Balance);
-        }
-
     }
-}
+} 

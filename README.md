@@ -1,46 +1,55 @@
 ﻿# BankSystem — Lab 34
 
-Проста консольна система управління банківськими рахунками для Lab 34.
+Базова консольна система управління банківськими рахунками для Lab 34.
 
-Проєкт реалізує базову бізнес-логіку для роботи з рахунками та грошовими операціями.
-
----
-
-# 🔹 Основні можливості
-
-- створення рахунків;
-- депозит на рахунок;
-- зняття коштів;
-- переказ між рахунками;
-- перегляд усіх рахунків;
-- базові unit-тести.
+Проєкт демонструє архітектуру baseline з простою бізнес-логікою та мінімальною persistence-компонентою.
 
 ---
 
-# 🔹 Структура проєкту
+## Реалізовані можливості
 
-- `src/` — код програми;
-- `tests/` — unit-тести;
-- `docs/` — документація;
-- `.github/workflows/` — CI pipeline.
+- Багатошарова архітектура:
+  - Domain
+  - Application
+  - Infrastructure
+  - Console UI
+  - Tests
+- Persistence через JSON
+- Repository pattern
+- Dependency Injection
+- Unit tests та integration tests
+- Fault handling
+- Coverage
+- CI через GitHub Actions
+- UML та ER diagrams
+- Release documentation
 
 ---
 
-# 🔹 Запуск
+## Структура проєкту
 
-## Збірка
+- `src/`
+- `tests/`
+- `docs/`
+- `.github/workflows/`
+
+---
+
+## Запуск
+
+### Збірка
 
 ```bash
 dotnet build
 ```
 
-## Запуск програми
+### Запуск програми
 
 ```bash
 dotnet run --project src/BankSystem.Console
 ```
 
-## Запуск тестів
+### Запуск тестів
 
 ```bash
 dotnet test
@@ -48,7 +57,25 @@ dotnet test
 
 ---
 
-# 🔹 Тестування
+## Coverage
 
-У проєкті реалізовано 5 базових unit-тестів для перевірки бізнес-логіки.
+```bash
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+```
+
+---
+
+## CI
+
+GitHub Actions автоматично:
+- restore
+- build
+- test
+- coverage
+
+---
+
+## Результат запуску тестів
+
+![Tests](docs/images/tests.png)
 

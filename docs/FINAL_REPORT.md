@@ -1,5 +1,21 @@
 # Final Report
-Виконано 5 варіант. 
-Використано: SOLID (SRP, LSP, DIP), Repository Pattern.
-Кількість класів: 7.
-Шари: Domain, Application, Console, Tests.
+
+## Що зроблено
+- реалізовано базовий банківський додаток для Lab 34;
+- побудовано багатошарову багатошарову архітектуру;
+- додано репозиторій та інтерфейси;
+- реалізовано операції створення рахунків, депозиту, зняття та переказу;
+- підготовлено документацію для релізу;
+- налаштовано CI для автоматичної збірки та тестування.
+
+## Використані теми курсу
+- SOLID
+- Repository Pattern
+- Dependency Injection
+- Unit Testing
+- Integration Testing
+- LINQ
+- Generics
+- Serialization
+- UML
+- CI/CD

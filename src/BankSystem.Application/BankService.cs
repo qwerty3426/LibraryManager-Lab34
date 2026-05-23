@@ -38,17 +38,8 @@ namespace BankSystem.Application
 
         public void Deposit(int accountId, decimal amount)
         {
-            var account = _accountRepo.GetById(accountId);
-
-            if (account == null)
-            {
-                throw new Exception("Рахунок не знайдено!");
-            }
-
-            if (amount <= 0)
-            {
-                throw new Exception("Сума має бути більшою за 0!");
-            }
+            var account = GetAccountOrThrow(accountId);
+            ValidateAmount(amount);
 
             account.Balance += amount;
             _accountRepo.SaveChanges();
@@ -56,17 +47,8 @@ namespace BankSystem.Application
 
         public void Withdraw(int accountId, decimal amount)
         {
-            var account = _accountRepo.GetById(accountId);
-
-            if (account == null)
-            {
-                throw new Exception("Рахунок не знайдено!");
-            }
-
-            if (amount <= 0)
-            {
-                throw new Exception("Сума має бути більшою за 0!");
-            }
+            var account = GetAccountOrThrow(accountId);
+            ValidateAmount(amount);
 
             if (account.Balance < amount)
             {
@@ -79,18 +61,9 @@ namespace BankSystem.Application
 
         public void Transfer(int fromAccountId, int toAccountId, decimal amount)
         {
-            var sender = _accountRepo.GetById(fromAccountId);
-            var receiver = _accountRepo.GetById(toAccountId);
-
-            if (sender == null || receiver == null)
-            {
-                throw new Exception("Рахунок не знайдено!");
-            }
-
-            if (amount <= 0)
-            {
-                throw new Exception("Сума має бути більшою за 0!");
-            }
+            var sender = GetAccountOrThrow(fromAccountId);
+            var receiver = GetAccountOrThrow(toAccountId);
+            ValidateAmount(amount);
 
             if (sender.Balance < amount)
             {
@@ -105,6 +78,25 @@ namespace BankSystem.Application
         public IEnumerable<Account> GetAllAccounts()
         {
             return _accountRepo.GetAll();
+        }
+
+        private Account GetAccountOrThrow(int accountId)
+        {
+            var account = _accountRepo.GetById(accountId);
+            if (account == null)
+            {
+                throw new Exception("Рахунок не знайдено!");
+            }
+
+            return account;
+        }
+
+        private static void ValidateAmount(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new Exception("Сума має бути більшою за 0!");
+            }
         }
     }
 } 

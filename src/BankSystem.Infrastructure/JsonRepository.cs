@@ -42,7 +42,14 @@ namespace BankSystem.Infrastructure
         {
             if (!File.Exists(_filePath)) return new List<T>();
             var json = File.ReadAllText(_filePath);
-            return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
+            try
+            {
+                return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
+            }
+            catch (Exception)
+            {
+                return new List<T>();
+            }
         }
     }
 }

@@ -14,55 +14,40 @@ while (true)
     Console.WriteLine("5. Всі рахунки");
     Console.WriteLine("0. Вихід");
 
-    Console.Write("\nВаш вибір: ");
-    var choice = Console.ReadLine();
+    var choice = ReadString("\nВаш вибір: ");
 
     try
     {
         switch (choice)
         {
             case "1":
-                Console.Write("Ім'я власника: ");
-                var name = Console.ReadLine()!;
-
-                Console.Write("Початковий баланс: ");
-                var balance = decimal.Parse(Console.ReadLine()!);
+                var name = ReadString("Ім'я власника: ");
+                var balance = ReadDecimal("Початковий баланс: ");
 
                 bankService.CreateAccount(name, balance);
                 Console.WriteLine("Рахунок створено!");
                 break;
 
             case "2":
-                Console.Write("ID рахунку: ");
-                var depositId = int.Parse(Console.ReadLine()!);
-
-                Console.Write("Сума депозиту: ");
-                var depositAmount = decimal.Parse(Console.ReadLine()!);
+                var depositId = ReadInt("ID рахунку: ");
+                var depositAmount = ReadDecimal("Сума депозиту: ");
 
                 bankService.Deposit(depositId, depositAmount);
                 Console.WriteLine("Баланс оновлено!");
                 break;
 
             case "3":
-                Console.Write("ID рахунку: ");
-                var withdrawId = int.Parse(Console.ReadLine()!);
-
-                Console.Write("Сума: ");
-                var withdrawAmount = decimal.Parse(Console.ReadLine()!);
+                var withdrawId = ReadInt("ID рахунку: ");
+                var withdrawAmount = ReadDecimal("Сума: ");
 
                 bankService.Withdraw(withdrawId, withdrawAmount);
                 Console.WriteLine("Кошти знято!");
                 break;
 
             case "4":
-                Console.Write("З якого рахунку: ");
-                var fromId = int.Parse(Console.ReadLine()!);
-
-                Console.Write("На який рахунок: ");
-                var toId = int.Parse(Console.ReadLine()!);
-
-                Console.Write("Сума: ");
-                var transferAmount = decimal.Parse(Console.ReadLine()!);
+                var fromId = ReadInt("З якого рахунку: ");
+                var toId = ReadInt("На який рахунок: ");
+                var transferAmount = ReadDecimal("Сума: ");
 
                 bankService.Transfer(fromId, toId, transferAmount);
                 Console.WriteLine("Переказ успішний!");
@@ -88,4 +73,22 @@ while (true)
     {
         Console.WriteLine($"Помилка: {ex.Message}");
     }
+}
+
+static int ReadInt(string prompt)
+{
+    Console.Write(prompt);
+    return int.Parse(Console.ReadLine()!);
+}
+
+static decimal ReadDecimal(string prompt)
+{
+    Console.Write(prompt);
+    return decimal.Parse(Console.ReadLine()!);
+}
+
+static string ReadString(string prompt)
+{
+    Console.Write(prompt);
+    return Console.ReadLine()!;
 }
